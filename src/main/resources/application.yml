@@ -1,0 +1,16 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    mongodb:
+    url: mongodb://localhost:27017/trazabilidad
+  jpa:
+
+jwt:
+  secret:
+
+app:
+  appDescription: "Pragma Powerup"
+  appVersion: "1.0.0"
+
