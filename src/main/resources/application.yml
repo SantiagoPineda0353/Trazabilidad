@@ -5,7 +5,6 @@ spring:
   datasource:
     mongodb:
     url: mongodb://localhost:27017/trazabilidad
-  jpa:
 
 jwt:
   secret:
