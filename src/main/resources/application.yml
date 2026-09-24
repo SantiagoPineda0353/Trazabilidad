@@ -7,9 +7,9 @@ spring:
     url: mongodb://localhost:27017/trazabilidad
 
 jwt:
-  secret:
+  secret: 98000c1976f4ae3f369df01403c7ab2c5ffe1267e47e5bc5fdcb54ddf65d3af4
 
 app:
-  appDescription: "Pragma Powerup"
+  appDescription: "Trazabilidad MicroServicio"
   appVersion: "1.0.0"
 
