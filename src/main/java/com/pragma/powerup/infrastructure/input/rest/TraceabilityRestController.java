@@ -29,4 +29,8 @@ public class TraceabilityRestController {
         Long idClient = AuthenticationUtils.getAuthenticatedUserId();
         return ResponseEntity.ok(traceabilityHandler.getOrderTraceability(idOrder,idClient));
     }
+    @GetMapping("/order/{idOrder}/total-duration")
+    public ResponseEntity<Long> getOrderTotalDuration(@PathVariable  Long idOrder) {
+        return ResponseEntity.ok(traceabilityHandler.getOrderTotalDurationSeconds(idOrder));
+    }
 }

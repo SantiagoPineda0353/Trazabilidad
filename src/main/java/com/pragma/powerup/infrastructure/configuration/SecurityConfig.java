@@ -23,6 +23,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                     .antMatchers( HttpMethod.POST,"/api/v1/traceability/**").permitAll()
+                    .antMatchers( HttpMethod.GET,"/api/v1/traceability/order/*/total-duration").permitAll()
                     .antMatchers( HttpMethod.GET,"/api/v1/traceability/*").hasRole("CLIENTE")
                 .anyRequest().authenticated()
                 .and()

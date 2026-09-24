@@ -6,6 +6,7 @@ import com.pragma.powerup.domain.exception.TraceabilityNotFoundException;
 import com.pragma.powerup.domain.model.*;
 import com.pragma.powerup.domain.spi.ITraceabilityPersistencePort;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -36,5 +37,16 @@ public class TraceabilityUseCase implements ITraceabilityServicePort {
             throw new ClientNotOwnerOfTraceabilityException();
         }
         return records;
+    }
+
+    @Override
+    public Long getOrderTotalDurationSeconds(Long idOrder) {
+        List<TraceabilityModel> records= traceabilityPersistencePort.getOrderById(idOrder);
+        if(records.isEmpty()){
+            return null;
+        }
+        TraceabilityModel first = records.get(0);
+        TraceabilityModel last = records.get(records.size()-1);
+        return Duration.between(first.getDate().atZone(ZONE_ID),last.getDate().atZone(ZONE_ID)).getSeconds();
     }
 }
