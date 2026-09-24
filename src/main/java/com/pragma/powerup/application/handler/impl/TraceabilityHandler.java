@@ -43,4 +43,9 @@ public class TraceabilityHandler implements ITraceabilityHandler {
         }
         return response;
     }
+
+    @Override
+    public Long getOrderTotalDurationSeconds(Long idOrder) {
+        return traceabilityServicePort.getOrderTotalDurationSeconds(idOrder);
+    }
 }

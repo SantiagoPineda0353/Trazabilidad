@@ -8,4 +8,5 @@ import java.util.List;
 public interface ITraceabilityHandler {
     void saveTraceability(SaveTraceabilityRequestDto saveTraceabilityRequestDto);
     List<TraceabilityResponseDto> getOrderTraceability(Long idOrder, Long idClient);
+    Long getOrderTotalDurationSeconds(Long idOrder);
 }

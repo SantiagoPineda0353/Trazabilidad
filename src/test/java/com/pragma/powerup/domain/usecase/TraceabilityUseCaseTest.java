@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,5 +73,27 @@ class TraceabilityUseCaseTest {
 
         assertThrows(ClientNotOwnerOfTraceabilityException.class,
                 () ->traceabilityUseCase.getOrderTraceability(1L,otherClient));
+    }
+    @Test
+    void getOrderTotalDurationSeconds_whenRecordsExist_thenReturnDuration(){
+        LocalDateTime start= LocalDateTime.now().minusMinutes(10);
+        LocalDateTime end= LocalDateTime.now();
+
+        TraceabilityModel first= new TraceabilityModel("1",1L,5L,"c@correo.com",start,"PENDIENTE","EN_PREPARACION",3L,"e@correo.com");
+        TraceabilityModel last= new TraceabilityModel("2",1L,5L,"c@correo.com",end,"LISTO","ENTREGADO",3L,"e@correo.com");
+
+        when(traceabilityPersistencePort.getOrderById(1L))
+                .thenReturn(List.of(first,last));
+
+        Long duration=traceabilityUseCase.getOrderTotalDurationSeconds(1L);
+
+        assertEquals(600,duration);
+    }
+
+    @Test
+    void getOrderTotalDurationSeconds_whenNoRecords_thenReturnNull(){
+        when(traceabilityPersistencePort.getOrderById(99L))
+                .thenReturn(List.of());
+        assertNull(traceabilityUseCase.getOrderTotalDurationSeconds(99L));
     }
 }
