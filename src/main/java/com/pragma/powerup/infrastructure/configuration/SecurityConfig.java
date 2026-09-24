@@ -22,6 +22,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                    .antMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml").permitAll()
                     .antMatchers( HttpMethod.POST,"/api/v1/traceability/**").permitAll()
                     .antMatchers( HttpMethod.GET,"/api/v1/traceability/order/*/total-duration").permitAll()
                     .antMatchers( HttpMethod.GET,"/api/v1/traceability/*").hasRole("CLIENTE")
